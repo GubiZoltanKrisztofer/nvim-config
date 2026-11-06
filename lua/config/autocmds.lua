@@ -5,4 +5,13 @@
 -- with `vim.api.nvim_create_autocmd`
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
+-- Formatting with ZLS matches `zig fmt`.
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.zig", "*.zon" },
+  callback = function(ev)
+    vim.lsp.buf.format()
+  end,
+})
+
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")

@@ -1,6 +1,13 @@
-vim.notify(">>> tiny-inline-diagnostic config executed! <<<", vim.log.levels.WARN)
+-- 1. Disable native virtual text so tiny-inline can take over
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+})
 
 require("tiny-inline-diagnostic").setup({
+  vim.notify(">>> tiny-inline-diagnostic config executed! <<<", vim.log.levels.WARN),
   -- Choose a preset style for diagnostic appearance
   -- Available: "modern", "classic", "minimal", "powerline", "ghost", "simple", "nonerdfont", "amongus"
   preset = "powerline",
@@ -86,7 +93,7 @@ require("tiny-inline-diagnostic").setup({
 
     -- Enable diagnostics display in insert mode
     -- May cause visual artifacts; consider setting throttle to 0 if enabled
-    enable_on_insert = false,
+    enable_on_insert = true,
 
     -- Enable diagnostics display in select mode (e.g., during auto-completion)
     enable_on_select = true,
@@ -111,7 +118,7 @@ require("tiny-inline-diagnostic").setup({
     -- Virtual text display priority
     -- Higher values appear above other plugins (e.g., GitBlame)
     virt_texts = {
-      priority = 2048,
+      priority = 2000,
     },
 
     -- Filter diagnostics by severity levels
@@ -134,7 +141,7 @@ require("tiny-inline-diagnostic").setup({
     experimental = {
       -- Make diagnostics not mirror across windows containing the same buffer
       -- See: https://github.com/rachartier/tiny-inline-diagnostic.nvim/issues/127
-      use_window_local_extmarks = false,
+      use_window_local_extmarks = true,
     },
   },
 })
